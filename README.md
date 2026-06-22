@@ -6,6 +6,13 @@ VoxMed is a modern, full-stack medical helper application designed to streamline
 
 ---
 
+## 🌐 Live Deployments
+
+*   **Frontend (Vercel)**: [https://vox-16uvhgdpy-indhubreddy-4063s-projects.vercel.app](https://vox-16uvhgdpy-indhubreddy-4063s-projects.vercel.app)
+*   **Backend API (Render)**: [https://voxmed-u242.onrender.com](https://voxmed-u242.onrender.com)
+
+---
+
 ## 🚀 Key Features
 
 *   **🎙️ Multi-Lingual Vocal Consultations**: Real-time voice/speech recognition (using Browser Speech Recognition or the **Bhashini Speech Engine** for local Indian languages).
