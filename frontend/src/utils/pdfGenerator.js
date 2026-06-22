@@ -1,6 +1,173 @@
 import { jsPDF } from 'jspdf';
 
-export const downloadConsultationPDF = (data) => {
+const VERNACULAR_FONTS = {
+  'telugu': {
+    name: 'NotoSansTelugu',
+    url: 'https://raw.githubusercontent.com/google/fonts/main/ofl/notosanstelugu/NotoSansTelugu-Regular.ttf'
+  },
+  'hindi': {
+    name: 'NotoSansDevanagari',
+    url: 'https://raw.githubusercontent.com/google/fonts/main/ofl/notosansdevanagari/NotoSansDevanagari-Regular.ttf'
+  },
+  'tamil': {
+    name: 'NotoSansTamil',
+    url: 'https://raw.githubusercontent.com/google/fonts/main/ofl/notosanstamil/NotoSansTamil-Regular.ttf'
+  },
+  'kannada': {
+    name: 'NotoSansKannada',
+    url: 'https://raw.githubusercontent.com/google/fonts/main/ofl/notosanskannada/NotoSansKannada-Regular.ttf'
+  },
+  'malayalam': {
+    name: 'NotoSansMalayalam',
+    url: 'https://raw.githubusercontent.com/google/fonts/main/ofl/notosansmalayalam/NotoSansMalayalam-Regular.ttf'
+  }
+};
+
+const loadUnicodeFont = async (doc, langName) => {
+  const langKey = (langName || '').toLowerCase();
+  const fontInfo = VERNACULAR_FONTS[langKey];
+  if (!fontInfo) return null;
+
+  try {
+    const response = await fetch(fontInfo.url);
+    if (!response.ok) throw new Error(`Status ${response.status}`);
+    const arrayBuffer = await response.arrayBuffer();
+    
+    // Convert ArrayBuffer to base64
+    let binary = '';
+    const bytes = new Uint8Array(arrayBuffer);
+    const len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    const base64 = btoa(binary);
+    
+    const filename = `${fontInfo.name}.ttf`;
+    doc.addFileToVFS(filename, base64);
+    doc.addFont(filename, fontInfo.name, 'normal');
+    return fontInfo.name;
+  } catch (error) {
+    console.error(`Failed to load custom font for ${langName}:`, error);
+    return null;
+  }
+};
+
+// Dynamically inject Google Fonts stylesheet for browser canvas rendering
+const loadFontForCanvas = (langKey) => {
+  return new Promise((resolve) => {
+    const fontsMap = {
+      'telugu': { family: 'Noto Sans Telugu', url: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;700&display=swap' },
+      'hindi': { family: 'Noto Sans Devanagari', url: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap' },
+      'tamil': { family: 'Noto Sans Tamil', url: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700&display=swap' },
+      'kannada': { family: 'Noto Sans Kannada', url: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;700&display=swap' },
+      'malayalam': { family: 'Noto Sans Malayalam', url: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;700&display=swap' }
+    };
+    
+    const fontInfo = fontsMap[langKey];
+    if (!fontInfo) {
+      resolve('sans-serif');
+      return;
+    }
+    
+    // Safety timeout in case fonts don't load (default to system fallback font)
+    const timeout = setTimeout(() => {
+      resolve(`"${fontInfo.family}", sans-serif`);
+    }, 2000);
+    
+    const linkId = `font-${langKey}`;
+    if (document.getElementById(linkId)) {
+      if (document.fonts) {
+        document.fonts.ready.then(() => {
+          clearTimeout(timeout);
+          resolve(`"${fontInfo.family}", sans-serif`);
+        });
+      } else {
+        clearTimeout(timeout);
+        resolve(`"${fontInfo.family}", sans-serif`);
+      }
+      return;
+    }
+    
+    const link = document.createElement('link');
+    link.id = linkId;
+    link.rel = 'stylesheet';
+    link.href = fontInfo.url;
+    link.onload = () => {
+      if (document.fonts) {
+        document.fonts.ready.then(() => {
+          clearTimeout(timeout);
+          resolve(`"${fontInfo.family}", sans-serif`);
+        });
+      } else {
+        clearTimeout(timeout);
+        resolve(`"${fontInfo.family}", sans-serif`);
+      }
+    };
+    link.onerror = () => {
+      clearTimeout(timeout);
+      resolve('sans-serif');
+    };
+    document.head.appendChild(link);
+  });
+};
+
+// Render wrapped text onto an offscreen canvas to leverage browser text shaping for Indic scripts
+const drawTextOnCanvas = (text, font, widthPx, fontSize = 40, lineSpace = 1.5, textColor = '#1E293B') => {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  
+  canvas.width = widthPx;
+  canvas.height = 2000; // temporary height
+  
+  ctx.font = `${fontSize}px ${font}`;
+  ctx.textBaseline = 'top';
+  
+  const words = text.split(' ');
+  const lines = [];
+  let currentLine = '';
+  
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    const testLine = currentLine ? currentLine + ' ' + word : word;
+    const metrics = ctx.measureText(testLine);
+    if (metrics.width > widthPx) {
+      if (currentLine) {
+        lines.push(currentLine);
+      }
+      currentLine = word;
+    } else {
+      currentLine = testLine;
+    }
+  }
+  if (currentLine) {
+    lines.push(currentLine);
+  }
+  
+  const lineHeight = fontSize * lineSpace;
+  const padding = 15;
+  const totalHeight = Math.max(lineHeight, lines.length * lineHeight + padding);
+  
+  canvas.height = totalHeight;
+  
+  // Clear/Transparent Background
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Redraw text on scaled canvas size
+  ctx.font = `${fontSize}px ${font}`;
+  ctx.fillStyle = textColor;
+  ctx.textBaseline = 'top';
+  
+  lines.forEach((line, index) => {
+    ctx.fillText(line, 0, index * lineHeight);
+  });
+  
+  return {
+    dataUrl: canvas.toDataURL('image/png'),
+    heightPx: totalHeight
+  };
+};
+
+export const downloadConsultationPDF = async (data) => {
   if (!data) return;
 
   const doc = new jsPDF({
@@ -8,6 +175,8 @@ export const downloadConsultationPDF = (data) => {
     unit: 'mm',
     format: 'a4'
   });
+
+  const fontName = await loadUnicodeFont(doc, data.language);
 
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
@@ -116,33 +285,135 @@ export const downloadConsultationPDF = (data) => {
   doc.text(`Original Transcript (${data.language}):`, margin, currentY);
   
   currentY += 5;
-  doc.setFont('Helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
-  const splitTranscript = doc.splitTextToSize(data.transcript || 'No transcript available', contentWidth);
-  doc.text(splitTranscript, margin, currentY);
   
-  currentY += (splitTranscript.length * 5) + 3;
+  const isVernacular = ['telugu', 'hindi', 'tamil', 'kannada', 'malayalam'].includes((data.language || '').toLowerCase());
+  
+  if (isVernacular) {
+    const fontStyleName = await loadFontForCanvas((data.language || '').toLowerCase());
+    const scale = 4; // High DPI scale factor
+    const canvasResult = drawTextOnCanvas(
+      data.transcript || 'No transcript available',
+      fontStyleName,
+      contentWidth * scale,
+      10 * scale, // 10pt font equivalent
+      1.5,
+      '#1E293B'
+    );
+    
+    const imgWidth = contentWidth;
+    const imgHeight = canvasResult.heightPx / scale;
+    
+    // Check page overflow
+    if (currentY + imgHeight > pageHeight - 35) {
+      doc.addPage();
+      currentY = 25;
+      
+      // Page header on new page
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
+      doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
+      doc.line(margin, 17, pageWidth - margin, 17);
+    }
+    
+    doc.addImage(canvasResult.dataUrl, 'PNG', margin, currentY, imgWidth, imgHeight);
+    currentY += imgHeight + 5;
+  } else {
+    doc.setFont('Helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
+    const splitTranscript = doc.splitTextToSize(data.transcript || 'No transcript available', contentWidth);
+    
+    if (currentY + (splitTranscript.length * 5) > pageHeight - 35) {
+      doc.addPage();
+      currentY = 25;
+      
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
+      doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
+      doc.line(margin, 17, pageWidth - margin, 17);
+    }
+    
+    doc.text(splitTranscript, margin, currentY);
+    currentY += (splitTranscript.length * 5) + 5;
+  }
 
+  // English Translation Label
   doc.setFont('Helvetica', 'bold');
   doc.setFontSize(9);
   doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
-  doc.text('English Translation:', margin, currentY);
   
+  if (currentY > pageHeight - 25) {
+    doc.addPage();
+    currentY = 25;
+    
+    doc.setFont('Helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
+    doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
+    doc.line(margin, 17, pageWidth - margin, 17);
+    
+    doc.setFont('Helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
+  }
+  
+  doc.text('English Translation:', margin, currentY);
   currentY += 5;
+  
+  // English Translation Content
   doc.setFont('Helvetica', 'normal');
   doc.setFontSize(10);
   doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
   const splitTranslation = doc.splitTextToSize(data.translation || 'No translation available', contentWidth);
-  doc.text(splitTranslation, margin, currentY);
+  
+  for (let i = 0; i < splitTranslation.length; i++) {
+    if (currentY > pageHeight - 25) {
+      doc.addPage();
+      currentY = 25;
+      
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
+      doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
+      doc.line(margin, 17, pageWidth - margin, 17);
+      
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
+    }
+    doc.text(splitTranslation[i], margin, currentY);
+    currentY += 5;
+  }
 
   // Divider
-  currentY += (splitTranslation.length * 5) + 8;
+  currentY += 5;
+  if (currentY > pageHeight - 25) {
+    doc.addPage();
+    currentY = 25;
+    
+    doc.setFont('Helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
+    doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
+    doc.line(margin, 17, pageWidth - margin, 17);
+  }
   doc.setDrawColor(226, 232, 240);
   doc.line(margin, currentY, pageWidth - margin, currentY);
 
-  // SOAP Note Section
+  // SOAP Note Section Header
   currentY += 8;
+  if (currentY > pageHeight - 25) {
+    doc.addPage();
+    currentY = 25;
+    
+    doc.setFont('Helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
+    doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
+    doc.line(margin, 17, pageWidth - margin, 17);
+  }
   doc.setFont('Helvetica', 'bold');
   doc.setFontSize(12);
   doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
@@ -157,40 +428,57 @@ export const downloadConsultationPDF = (data) => {
 
   soapSections.forEach((section) => {
     currentY += 8;
-    // Section header
+    if (currentY > pageHeight - 25) {
+      doc.addPage();
+      currentY = 25;
+      
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
+      doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
+      doc.line(margin, 17, pageWidth - margin, 17);
+    }
+    
+    // Section Header
     doc.setFont('Helvetica', 'bold');
     doc.setFontSize(10);
     doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
     doc.text(section.label, margin, currentY);
 
-    // Section content
+    // Section Content
     currentY += 5;
     doc.setFont('Helvetica', 'normal');
     doc.setFontSize(9.5);
     doc.setTextColor(51, 65, 85); // slate-700
     const splitText = doc.splitTextToSize(section.text, contentWidth);
     
-    // Check page height limit to prevent overflow
-    if (currentY + (splitText.length * 5) > pageHeight - 35) {
-      doc.addPage();
-      currentY = 25;
-      // Add small page header
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
-      doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
-      doc.line(margin, 17, pageWidth - margin, 17);
-      
-      // Reprint section title
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(10);
-      doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
-      doc.text(`${section.label} (Continued)`, margin, currentY);
+    // Draw section lines one-by-one to support multi-page overflow cleanly
+    for (let i = 0; i < splitText.length; i++) {
+      if (currentY > pageHeight - 25) {
+        doc.addPage();
+        currentY = 25;
+        
+        doc.setFont('Helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
+        doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
+        doc.line(margin, 17, pageWidth - margin, 17);
+        
+        // Reprint header on new page for visual continuity
+        doc.setFont('Helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
+        doc.text(`${section.label} (Continued)`, margin, currentY);
+        currentY += 6;
+        
+        // Restore font settings
+        doc.setFont('Helvetica', 'normal');
+        doc.setFontSize(9.5);
+        doc.setTextColor(51, 65, 85);
+      }
+      doc.text(splitText[i], margin, currentY);
       currentY += 5;
     }
-    
-    doc.text(splitText, margin, currentY);
-    currentY += (splitText.length * 5);
   });
 
   // Footer / Sign-off Block
@@ -200,7 +488,7 @@ export const downloadConsultationPDF = (data) => {
     currentY = 25;
   }
 
-  // Draw separator line for signature
+  // Draw signature lines
   doc.setDrawColor(203, 213, 225); // slate-300
   doc.line(margin, currentY, margin + 60, currentY);
   doc.line(pageWidth - margin - 60, currentY, pageWidth - margin, currentY);

@@ -50,10 +50,10 @@ const getMockResponse = (text, language) => {
     transcript: text || 'సహాయం కావాలి.',
     translation: text ? `I need assistance. (Mock translated: ${text})` : 'I need assistance.',
     soap_note: {
-      subjective: `Patient reports general symptoms: "${text || 'No text provided'}". No specific pain localized in major areas.`,
-      objective: 'No physical examination available. General vocal contact established.',
-      assessment: 'Unspecified symptoms. Needs direct clinical evaluation by a medical officer.',
-      plan: '1. Standard hydration and rest.\n2. Advise visit to local Primary Health Centre (PHC) if symptoms persist.\n3. Monitor vitals daily.'
+      subjective: `• Chief Complaint: Patient reports general symptoms: "${text || 'No text provided'}".\n• History of Present Illness: Sudden onset of discomfort, mild fatigue, and unspecified symptoms.\n• Location/Radiation: No specific pain localized in major areas.\n• Associated Symptoms: Denies shortness of breath, chest pain, or severe vomiting.`,
+      objective: `• Physical Observations: Remote consultation via vocal contact. Vocal quality appears stable and clear.\n• Vital Signs: No objective vital signs are currently available.\n• Clinic Recommendation: Immediately check patient's temperature, blood pressure, pulse rate, and oxygen saturation upon arrival.`,
+      assessment: `• Primary Suspected Condition: Unspecified General Symptoms.\n• Differential Diagnoses:\n  1. Mild Viral Prodrome\n  2. Anxiety/Fatigue-induced malaise\n• Rationale: Non-specific presentation with no localized clinical signs, suggesting a low-risk category.`,
+      plan: `1. Immediate Interventions: Recommend standard oral hydration and rest.\n2. Advise patient to visit local Primary Health Centre (PHC) if symptoms persist beyond 48 hours.\n3. Vitals Monitoring: Monitor body temperature and blood pressure daily.\n4. Red Flags: Seek emergency care immediately if high fever, severe pain, or breathing difficulties develop.`
     },
     triage: {
       condition: 'Unspecified General Symptoms',
@@ -79,7 +79,7 @@ A patient speaking ${language} says: "${transcript}"
 
 Task:
 1. Translate the patient's statement into accurate, clinical English.
-2. Convert this clinical description into a structured medical SOAP note.
+2. Convert this clinical description into a structured medical SOAP note. Make sure each section is highly detailed, professional, and written in multi-line format with bullet points and standard medical terminology. Do NOT write simple, single-sentence descriptions.
 3. Perform a triage assessment determining the possible condition and urgency level. Urgency level must be one of: "Low", "Moderate", "High". (e.g., chest pain with breathing difficulty is High; mild joint pain is Low; high fever is Moderate).
 
 Return ONLY a valid JSON object matching this schema. Do not write any markdown code block wraps (like \`\`\`json) or extra text. Just return raw JSON.
@@ -88,10 +88,10 @@ Schema:
 {
   "translation": "English translation of patient's original statement",
   "soap_note": {
-    "subjective": "Subjective history, chief complaints, symptoms described by the patient",
-    "objective": "Objective findings (mention this is a remote vocal consultation, note voice distress level or reported vital facts like temperature if mentioned)",
-    "assessment": "Differential diagnoses or possible conditions based on clinical presentation",
-    "plan": "Next steps, recommendation, medications if applicable, or referral urgency instructions"
+    "subjective": "Provide a detailed subjective history of the illness. Must include separate bulleted lines for:\\n• Chief Complaint (CC): [describe complaint]\\n• History of Present Illness (HPI): [describe onset, duration, character, aggravating/alleviating factors, and severity]\\n• Associated Symptoms and relevant negatives: [describe other symptoms present or explicitly denied by patient]",
+    "objective": "Provide detailed objective observations. Must include separate bulleted lines for:\\n• Remote Vocal Consultation: [explain physical exam limitations of remote consultation]\\n• Vocal Cues & Speech Attributes: [describe vocal distress, speech rate, breathlessness, tone, etc. inferred from text/situation]\\n• Recommended Vitals: [list baseline vitals that must be measured immediately at the clinic (temp, pulse, BP, SpO2)]",
+    "assessment": "Provide a detailed clinical assessment. Must include separate bulleted lines for:\\n• Primary Suspected Diagnosis: [suspected primary condition with brief clinical justification]\\n• Differential Diagnoses: [list at least 2-3 potential alternative diagnoses to rule out]\\n• Clinical Rationale: [briefly explain the reasoning behind the chosen triage urgency level]",
+    "plan": "Provide a structured plan of action. Must include separate numbered lines for:\\n1. Immediate Interventions: [first aid, positioning, rest or urgent clinic routing]\\n2. Recommended Diagnostics / Workup: [relevant blood tests, imaging, ECG, etc. based on condition]\\n3. Symptomatic Treatment / Recommendations: [fluid intake, self-care, over-the-counter medication instructions if appropriate]\\n4. Red Flag Warnings & Safety Netting: [critical emergency symptoms that require immediate emergency room visitation]"
   },
   "triage": {
     "condition": "Suspected primary clinical condition",

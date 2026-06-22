@@ -10,10 +10,10 @@ export const DEMO_PRESETS = [
       urgency: "High"
     },
     soap_note: {
-      subjective: "Patient reports experiencing dull, pressure-like chest pain for the past two days. Mentions that the pain is constant and worsens upon deep inspiration. Associated with shortness of breath (dyspnea). Denies radiating pain to the left arm or jaw, nausea, or sweating.",
-      objective: "Patient appears in mild distress. Respiratory rate is slightly elevated at 22/min. No physical examination findings are available since this is a remote vocal consult. Suggest immediate vital check.",
-      assessment: "Angina pectoris vs. acute coronary syndrome vs. pulmonary embolism vs. pleuritic chest pain. Given the presence of chest pain combined with dyspnea, cardiac or pulmonary emergencies must be ruled out.",
-      plan: "1. Refer immediately to the nearest secondary/tertiary hospital or emergency department.\n2. Advise resting in a semi-upright position.\n3. Recommend administration of Aspirin 325mg PO if cardiac etiology suspected and no contraindications.\n4. Avoid any physical exertion."
+      subjective: "• Chief Complaint (CC): Severe chest pain for 2 days.\n• History of Present Illness (HPI): Dull, pressure-like chest pain of constant nature, worsening significantly upon deep inspiration (pleuritic description). Associated with progressive dyspnea.\n• Associated Symptoms: Patient denies radiation to left arm or jaw, nausea, vomiting, or diaphoresis.",
+      objective: "• Remote Vocal Consultation: Physical examination restricted by distance. Vocal contact only.\n• Vocal Cues & Speech Attributes: Speech exhibits moderate distress and slight breathlessness between sentences.\n• Recommended Vitals: Prompt evaluation of Blood Pressure, ECG, Heart Rate, and Oxygen Saturation (SpO2).",
+      assessment: "• Primary Suspected Diagnosis: Suspected Acute Coronary Syndrome (ACS) vs. Pleuritic Chest Pain.\n• Differential Diagnoses:\n  1. Angina pectoris\n  2. Pulmonary embolism\n  3. Pericarditis / Costochondritis\n• Clinical Rationale: Cardiopulmonary emergencies must be ruled out immediately due to the combination of chest pressure and shortness of breath.",
+      plan: "1. Immediate Interventions: Refer immediately to the nearest Emergency Department or Tertiary Hospital.\n2. Patient Positioning: Advise patient to rest in a semi-Fowler's (upright) position.\n3. Initial Therapy: Recommend Aspirin 325mg PO chewed immediately if no contraindications exist.\n4. Red Flag Warnings: Seek emergency transport. Avoid all physical exertion."
     }
   },
   {
@@ -27,10 +27,10 @@ export const DEMO_PRESETS = [
       urgency: "Moderate"
     },
     soap_note: {
-      subjective: "Patient complains of high-grade fever for three days, accompanied by generalized body aches (myalgia), moderate headache, and mild fatigue. Reports no cough, sore throat, or urinary burning.",
-      objective: "Patient is alert but fatigued. Oral temperature reported at 102°F. Hydration status appears adequate.",
-      assessment: "Acute febrile illness. Potential viral fever, dengue, malaria, or enteric fever depending on regional prevalence.",
-      plan: "1. Administer Paracetamol 650mg PO every 6 hours as needed for fever and pain.\n2. Encourage abundant oral hydration (ORS, coconut water, or clean water).\n3. Keep a temperature log every 4 hours.\n4. If fever persists beyond 5 days or if red flag symptoms (severe vomiting, bleeding, rash, confusion) develop, refer to primary health center (PHC)."
+      subjective: "• Chief Complaint (CC): High-grade fever and generalized myalgia for 3 days.\n• History of Present Illness (HPI): Acute onset of high-grade fever, accompanied by generalized myalgia, moderate headache, and severe fatigue. Fever is reported as continuous.\n• Associated Symptoms: Denies dry cough, sore throat, vomiting, rash, or burning micturition.",
+      objective: "• Remote Vocal Consultation: Limited to voice analysis. No physical examination.\n• Vocal Cues & Speech Attributes: Voice sounds weak and fatigued, but patient is coherent and oriented.\n• Recommended Vitals: Measure core temperature, blood pressure, pulse, and check for skin rashes.",
+      assessment: "• Primary Suspected Diagnosis: Acute Febrile Illness of suspected viral etiology.\n• Differential Diagnoses:\n  1. Dengue Fever / Malaria\n  2. Enteric Fever (Typhoid)\n  3. Influenza / COVID-19\n• Clinical Rationale: High-grade fever for 3 days with myalgia requires monitoring for local endemic vector-borne diseases.",
+      plan: "1. Immediate Interventions: Keep patient cool, rest, and start sponge baths if temperature exceeds 103°F.\n2. Recommended Diagnostics: Advise Complete Blood Count (CBC) and malaria smear if fever persists for another 24 hours.\n3. Symptomatic Treatment: Tab Paracetamol 650mg PO every 6 hours as needed for fever/pain. Maintain rich fluid intake (ORS, coconut water).\n4. Red Flag Warnings: Seek urgent care if patient develops persistent vomiting, skin rashes, nosebleeds, or confusion."
     }
   },
   {
@@ -44,10 +44,10 @@ export const DEMO_PRESETS = [
       urgency: "Low"
     },
     soap_note: {
-      subjective: "Patient is an elderly individual reporting bilateral knee joint pain for several months, which has severely worsened over the past week. Pain is exacerbated by walking and weight-bearing, making ambulation difficult. Notes morning stiffness lasting about 15 minutes.",
-      objective: "Patient reports swelling in both knees. Joint range of motion is restricted due to pain. No warmth or erythema reported.",
-      assessment: "Bilateral knee osteoarthritis flare-up vs. inflammatory arthritis.",
-      plan: "1. Suggest paracetamol 500mg PO for pain management as needed. Avoid high-dose NSAIDs if renal or GI risk factors exist.\n2. Recommend local warm/cold compresses.\n3. Rest the joints during acute flare; avoid deep squatting or cross-legged sitting.\n4. Recommend evaluation at a community health center for physical exam and X-ray."
+      subjective: "• Chief Complaint (CC): Chronic bilateral knee pain, acutely worsened over the past week.\n• History of Present Illness (HPI): Patient reports long-standing pain in both knees for several months. Pain has acutely worsened, rendering the patient unable to walk or bear weight comfortably. Morning stiffness is reported, lasting approximately 15 minutes.\n• Associated Symptoms: Reports bilateral knee swelling; denies fever, chills, or pain in other joints.",
+      objective: "• Remote Vocal Consultation: Joint examination and range of motion tests cannot be physically performed.\n• Vocal Cues & Speech Attributes: Slow, deliberate speech tone, consistent with chronic discomfort, but no acute respiratory distress.\n• Recommended Vitals: Measure patient weight, blood pressure, and visually inspect for joint erythema or deformity.",
+      assessment: "• Primary Suspected Diagnosis: Bilateral Knee Osteoarthritis Flare-Up.\n• Differential Diagnoses:\n  1. Inflammatory Arthritis (e.g., Rheumatoid Arthritis)\n  2. Gouty Arthropathy\n  3. Anserine Bursitis\n• Clinical Rationale: Slowly progressive bilateral joint pain with acute functional impairment (inability to walk) is highly suggestive of osteoarthritis flare-up.",
+      plan: "1. Immediate Interventions: Joint rest during the acute flare. Avoid deep squatting, kneeling, or sitting cross-legged.\n2. Recommended Diagnostics: Plain X-ray of bilateral knees (standing AP and lateral views) and serum Uric Acid / Rheumatoid Factor checks.\n3. Symptomatic Treatment: Tab Paracetamol 500mg PO every 8 hours as needed. Apply warm or cold compresses locally to the knees.\n4. Red Flag Warnings: Seek medical review if a single joint becomes hot, highly erythematous, and accompanied by high fever (concerning for septic arthritis)."
     }
   },
   {
@@ -61,10 +61,10 @@ export const DEMO_PRESETS = [
       urgency: "Moderate"
     },
     soap_note: {
-      subjective: "Patient reports sudden onset of moderate to severe throbbing headache, primarily unilateral, accompanied by two episodes of vomiting and sensitivity to light (photophobia). No history of head trauma.",
-      objective: "Patient reports distress. Lying down in a dark room. Blood pressure is unmeasured. No focal neurological deficits reported.",
-      assessment: "Acute migraine headache vs. tension-type headache vs. early meningitis.",
-      plan: "1. Resting in a quiet, dark room.\n2. Administer antiemetic (e.g. Domperidone 10mg PO) followed by analgesic (e.g. Ibuprofen 400mg PO) if tolerated.\n3. Maintain hydration. Monitor for meningeal signs (neck stiffness, high fever, altered consciousness).\n4. Consult local health worker if pain remains uncontrolled for 24 hours."
+      subjective: "• Chief Complaint (CC): Headache and vomiting for 1 day.\n• History of Present Illness (HPI): Sudden onset of moderate to severe throbbing headache, primarily unilateral, accompanied by two episodes of vomiting. Sensitivity to light (photophobia) and sound (phonophobia) is reported.\n• Associated Symptoms: Denies head trauma, neck stiffness, visual field defects, or fever.",
+      objective: "• Remote Vocal Consultation: Limited vocal analysis. Neurological examination is restricted.\n• Vocal Cues & Speech Attributes: Voice tone is quiet, consistent with photophobia/headache distress. Patient is alert and oriented.\n• Recommended Vitals: Check Blood Pressure, Temperature, and Pulse Rate.",
+      assessment: "• Primary Suspected Diagnosis: Acute Migraine Attack.\n• Differential Diagnoses:\n  1. Tension Headache\n  2. Early Viral Meningitis (must monitor for neck stiffness)\n  3. Increased Intracranial Pressure\n• Clinical Rationale: Throbbing unilateral headache with photophobia and vomiting is classic for migraine flare, but red flags must be monitored.",
+      plan: "1. Immediate Interventions: Rest in a quiet, dark room. Apply cold forehead compresses.\n2. Recommended Diagnostics: None indicated initially unless neurological changes occur.\n3. Symptomatic Treatment: Recommend antiemetic (e.g. Domperidone 10mg PO) followed by analgesic (e.g. Ibuprofen 400mg PO) if vomiting subsides. Maintain hydration.\n4. Red Flag Warnings: Seek emergency care if patient develops stiff neck, sudden high fever, altered mental status, or the 'worst headache of life'."
     }
   },
   {
@@ -78,10 +78,10 @@ export const DEMO_PRESETS = [
       urgency: "High"
     },
     soap_note: {
-      subjective: "Patient presents with a two-day history of acute productive cough accompanied by severe shortness of breath (dyspnea) at rest and mild fever. Reports a history of bronchial asthma but inhalers have not provided relief.",
-      objective: "Patient exhibits speech dyspnea (pausing for breath while talking). Reported respiratory rate is 25 breaths per minute.",
-      assessment: "Acute exacerbation of bronchial asthma vs. community-acquired pneumonia vs. acute bronchitis.",
-      plan: "1. Urgent transfer to the nearest clinic or hospital with oxygen therapy facilities.\n2. Administer salbutamol nebulization or inhaler with spacer immediately if available.\n3. Keep patient in an upright sitting position to aid chest expansion.\n4. Close monitoring of oxygen saturation and respiratory effort."
+      subjective: "• Chief Complaint (CC): Severe productive cough and shortness of breath for 2 days.\n• History of Present Illness (HPI): Acute onset of productive cough producing thick sputum, accompanied by severe shortness of breath (dyspnea) at rest. Patient has a known history of bronchial asthma but reports rescue inhalers have not provided relief.\n• Associated Symptoms: Reports low-grade fever and mild chest tightness; denies hemoptysis or night sweats.",
+      objective: "• Remote Vocal Consultation: Auscultation is not possible.\n• Vocal Cues & Speech Attributes: Speech exhibits marked shortness of breath, with frequent pauses between words (speech dyspnea).\n• Recommended Vitals: Measure Oxygen Saturation (SpO2) and Respiratory Rate immediately.",
+      assessment: "• Primary Suspected Diagnosis: Acute Asthma Exacerbation vs. Community-Acquired Pneumonia.\n• Differential Diagnoses:\n  1. Acute Bronchitis\n  2. Pulmonary Congestion\n  3. COVID-19 / Influenza\n• Clinical Rationale: Shortness of breath at rest, asthma history with poor inhaler response, and visible speech dyspnea indicate high-urgency respiratory compromise.",
+      plan: "1. Immediate Interventions: Urgent transfer to the nearest health facility with nebulization/oxygen support. Keep patient sitting upright.\n2. Recommended Diagnostics: Urgent Chest X-ray, Complete Blood Count (CBC), and continuous Pulse Oximetry.\n3. Symptomatic Treatment: Administer Salbutamol/Ipratropium nebulization or inhaler with spacer immediately if available. Monitor breathing rate.\n4. Red Flag Warnings: Call emergency response immediately if cyanosis (blue lips/nails), silent chest, or confusion develops."
     }
   }
 ];

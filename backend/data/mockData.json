@@ -5,10 +5,10 @@
     "transcript": "నాకు రెండు రోజులుగా ఛాతిలో నొప్పి ఉంది. శ్వాస తీసుకోవడం కష్టం.",
     "translation": "I have had pain in my chest for two days. It is difficult to breathe.",
     "soap_note": {
-      "subjective": "Patient reports experiencing dull, pressure-like chest pain for the past two days. Mentions that the pain is constant and worsens upon deep inspiration. Associated with shortness of breath (dyspnea). Denies radiating pain to the left arm or jaw, nausea, or sweating.",
-      "objective": "Patient appears in mild distress. Respiratory rate is slightly elevated at 22/min. No physical examination findings are available since this is a remote vocal consult. Suggest immediate vital check.",
-      "assessment": "Angina pectoris vs. acute coronary syndrome vs. pulmonary embolism vs. pleuritic chest pain. Given the presence of chest pain combined with dyspnea, cardiac or pulmonary emergencies must be ruled out.",
-      "plan": "1. Refer immediately to the nearest secondary/tertiary hospital or emergency department.\n2. Advise resting in a semi-upright position.\n3. Recommend administration of Aspirin 325mg PO if cardiac etiology suspected and no contraindications.\n4. Avoid any physical exertion."
+      "subjective": "• Chief Complaint (CC): Severe chest pain for 2 days.\n• History of Present Illness (HPI): Dull, pressure-like chest pain of constant nature, worsening significantly upon deep inspiration (pleuritic description). Associated with progressive dyspnea.\n• Associated Symptoms: Patient denies radiation to left arm or jaw, nausea, vomiting, or diaphoresis.",
+      "objective": "• Remote Vocal Consultation: Physical examination restricted by distance. Vocal contact only.\n• Vocal Cues & Speech Attributes: Speech exhibits moderate distress and slight breathlessness between sentences.\n• Recommended Vitals: Prompt evaluation of Blood Pressure, ECG, Heart Rate, and Oxygen Saturation (SpO2).",
+      "assessment": "• Primary Suspected Diagnosis: Suspected Acute Coronary Syndrome (ACS) vs. Pleuritic Chest Pain.\n• Differential Diagnoses:\n  1. Angina pectoris\n  2. Pulmonary embolism\n  3. Pericarditis / Costochondritis\n• Clinical Rationale: Cardiopulmonary emergencies must be ruled out immediately due to the combination of chest pressure and shortness of breath.",
+      "plan": "1. Immediate Interventions: Refer immediately to the nearest Emergency Department or Tertiary Hospital.\n2. Patient Positioning: Advise patient to rest in a semi-Fowler's (upright) position.\n3. Initial Therapy: Recommend Aspirin 325mg PO chewed immediately if no contraindications exist.\n4. Red Flag Warnings: Seek emergency transport. Avoid all physical exertion."
     },
     "triage": {
       "condition": "Acute Chest Pain / Possible Coronary Syndrome",
@@ -21,10 +21,10 @@
     "transcript": "मुझे तीन दिनों से बहुत तेज बुखार है और बदन में दर्द है।",
     "translation": "I have had a very high fever for three days and body ache.",
     "soap_note": {
-      "subjective": "Patient is a female/male complaining of high-grade fever for three days, accompanied by generalized body aches (myalgia), moderate headache, and mild fatigue. Reports no cough, sore throat, or urinary burning.",
-      "objective": "Patient is alert but fatigued. Oral temperature reported at 102°F. Hydration status appears adequate.",
-      "assessment": "Acute febrile illness. Potential viral fever, dengue, malaria, or enteric fever depending on regional prevalence.",
-      "plan": "1. Administer Paracetamol 650mg PO every 6 hours as needed for fever and pain.\n2. Encourage abundant oral hydration (ORSL, coconut water, or clean water).\n3. Keep a temperature log every 4 hours.\n4. If fever persists beyond 5 days or if red flag symptoms (severe vomiting, bleeding, rash, confusion) develop, refer to primary health center (PHC)."
+      "subjective": "• Chief Complaint (CC): High-grade fever and generalized myalgia for 3 days.\n• History of Present Illness (HPI): Acute onset of high-grade fever, accompanied by generalized body aches (myalgia), moderate headache, and severe fatigue. Fever is reported as continuous.\n• Associated Symptoms: Denies dry cough, sore throat, vomiting, rash, or burning micturition.",
+      "objective": "• Remote Vocal Consultation: Limited to voice analysis. No physical examination.\n• Vocal Cues & Speech Attributes: Voice sounds weak and fatigued, but patient is coherent and oriented.\n• Recommended Vitals: Measure core temperature, blood pressure, pulse, and check for skin rashes.",
+      "assessment": "• Primary Suspected Diagnosis: Acute Febrile Illness of suspected viral etiology.\n• Differential Diagnoses:\n  1. Dengue Fever / Malaria\n  2. Enteric Fever (Typhoid)\n  3. Influenza / COVID-19\n• Clinical Rationale: High-grade fever for 3 days with myalgia requires monitoring for local endemic vector-borne diseases.",
+      "plan": "1. Immediate Interventions: Keep patient cool, rest, and start sponge baths if temperature exceeds 103°F.\n2. Recommended Diagnostics: Advise Complete Blood Count (CBC) and malaria smear if fever persists for another 24 hours.\n3. Symptomatic Treatment: Tab Paracetamol 650mg PO every 6 hours as needed for fever/pain. Maintain rich fluid intake (ORS, coconut water).\n4. Red Flag Warnings: Seek urgent care if patient develops persistent vomiting, skin rashes, nosebleeds, or confusion."
     },
     "triage": {
       "condition": "Acute Febrile Illness / Possible Viral Syndrome",
@@ -37,10 +37,10 @@
     "transcript": "కడుపులో మంటగా ఉంది మరియు వాంతులు అవుతున్నాయి.",
     "translation": "There is a burning sensation in the stomach and vomiting is occurring.",
     "soap_note": {
-      "subjective": "Patient reports severe burning sensation in the epigastric region (upper abdomen) for the past 24 hours, accompanied by three episodes of non-bilious vomiting. Reports worsening after eating spicy food. Denies fever, diarrhea, or blood in vomitus.",
-      "objective": "Patient appears uncomfortable. Hydration status is fair with mild dry mouth.",
-      "assessment": "Acute gastritis vs. gastroesophageal reflux disease (GERD) vs. early gastroenteritis.",
-      "plan": "1. Advise small, frequent sips of ORS or water. Avoid solid foods for 4-6 hours.\n2. Suggest Proton Pump Inhibitor (e.g., Pantoprazole 40mg PO once daily before food) and Antacid gel if symptoms persist.\n3. Avoid spicy, oily, or acidic foods.\n4. Seek immediate evaluation if abdominal pain worsens, is localized to the right lower quadrant, or if unable to keep fluids down."
+      "subjective": "• Chief Complaint (CC): Epigastric burning and vomiting for 24 hours.\n• History of Present Illness (HPI): Severe burning sensation in the epigastric region (upper abdomen) for the past 24 hours, associated with three episodes of non-bilious, non-bloody vomiting. Worsened by ingestion of food.\n• Associated Symptoms: Denies fever, diarrhea, melena, or radiating pain to the back.",
+      "objective": "• Remote Vocal Consultation: Visual/abdominal palpation is not possible.\n• Vocal Cues & Speech Attributes: Speech tone is stable; voice sounds slightly dry, suggesting mild dehydration.\n• Recommended Vitals: Check blood pressure (orthostatic if possible), pulse rate, and assess oral mucosa hydration status.",
+      "assessment": "• Primary Suspected Diagnosis: Acute Gastritis vs. Gastroesophageal Reflux Disease (GERD).\n• Differential Diagnoses:\n  1. Peptic Ulcer Disease (PUD)\n  2. Early Viral Gastroenteritis\n  3. Biliary Colic\n• Clinical Rationale: Epigastric burning and recurrent vomiting suggest stomach lining irritation, with moderate risk of dehydration.",
+      "plan": "1. Immediate Interventions: Avoid solid foods for the next 4-6 hours. Take small, frequent sips of ORS.\n2. Recommended Diagnostics: If symptoms persist beyond 48 hours, consider stool evaluation or H. pylori testing.\n3. Symptomatic Treatment: Proton Pump Inhibitor (e.g. Pantoprazole 40mg PO once daily before breakfast) and an antacid gel (e.g. Sucralfate) as directed.\n4. Red Flag Warnings: Go to a clinic immediately if vomiting contains blood, stool becomes black/tarry, or abdominal pain becomes severe and localizes to the right lower quadrant."
     },
     "triage": {
       "condition": "Acute Gastritis / GERD with Emesis",
@@ -53,10 +53,10 @@
     "transcript": "எனக்கு இரண்டு முழங்கால்களிலும் கடுமையான வலி உள்ளது, நடக்க முடியவில்லை.",
     "translation": "I have severe pain in both of my knees and I am unable to walk.",
     "soap_note": {
-      "subjective": "Patient is an elderly individual reporting bilateral knee joint pain for several months, which has severely worsened over the past week. Pain is exacerbated by walking and weight-bearing, making ambulation difficult. Notes morning stiffness lasting about 15 minutes.",
-      "objective": "Patient reports swelling in both knees. Joint range of motion is restricted due to pain. No warmth or erythema reported.",
-      "assessment": "Bilateral knee osteoarthritis flare-up vs. inflammatory arthritis.",
-      "plan": "1. Suggest paracetamol 500mg PO for pain management as needed. Avoid high-dose NSAIDs if renal or GI risk factors exist.\n2. Recommend local warm/cold compresses.\n3. Rest the joints during acute flare; avoid deep squatting or cross-legged sitting.\n4. Recommend evaluation at a community health center for physical exam and X-ray."
+      "subjective": "• Chief Complaint (CC): Chronic bilateral knee pain, acutely worsened over the past week.\n• History of Present Illness (HPI): Patient reports long-standing pain in both knees for several months. Pain has acutely worsened, rendering the patient unable to walk or bear weight comfortably. Morning stiffness is reported, lasting approximately 15 minutes.\n• Associated Symptoms: Reports bilateral knee swelling; denies fever, chills, or pain in other joints.",
+      "objective": "• Remote Vocal Consultation: Joint examination and range of motion tests cannot be physically performed.\n• Vocal Cues & Speech Attributes: Slow, deliberate speech tone, consistent with chronic discomfort, but no acute respiratory distress.\n• Recommended Vitals: Measure patient weight, blood pressure, and visually inspect for joint erythema or deformity.",
+      "assessment": "• Primary Suspected Diagnosis: Bilateral Knee Osteoarthritis Flare-Up.\n• Differential Diagnoses:\n  1. Inflammatory Arthritis (e.g., Rheumatoid Arthritis)\n  2. Gouty Arthropathy\n  3. Anserine Bursitis\n• Clinical Rationale: Slowly progressive bilateral joint pain with acute functional impairment (inability to walk) is highly suggestive of osteoarthritis flare-up.",
+      "plan": "1. Immediate Interventions: Joint rest during the acute flare. Avoid deep squatting, kneeling, or sitting cross-legged.\n2. Recommended Diagnostics: Plain X-ray of bilateral knees (standing AP and lateral views) and serum Uric Acid / Rheumatoid Factor checks.\n3. Symptomatic Treatment: Tab Paracetamol 500mg PO every 8 hours as needed. Apply warm or cold compresses locally to the knees.\n4. Red Flag Warnings: Seek medical review if a single joint becomes hot, highly erythematous, and accompanied by high fever (concerning for septic arthritis)."
     },
     "triage": {
       "condition": "Bilateral Knee Osteoarthritis / Joint Flare-Up",
@@ -69,10 +69,10 @@
     "transcript": "मुझे बहुत दिनों से खांसी है और सीने में जकड़न महसूस हो रही है।",
     "translation": "I have had a cough for many days and feel tightness in my chest.",
     "soap_note": {
-      "subjective": "Patient complains of productive cough for over 10 days associated with chest tightness, nasal congestion, and low-grade fever. Denies shortness of breath at rest, hemoptysis, or night sweats.",
-      "objective": "Patient is coughing during conversation. Respiration rate is 18/min. Hydration is adequate.",
-      "assessment": "Acute bronchitis vs. respiratory tract infection vs. early pneumonia.",
-      "plan": "1. Hydration with warm water and steam inhalation twice daily.\n2. Cough suppressants or expectorants PO.\n3. Monitor temperature. If fever rises above 101°F or breathing difficulty develops, consult a doctor immediately.\n4. If cough persists beyond 2 weeks, recommend sputum test for Tuberculosis at the nearest PHC."
+      "subjective": "• Chief Complaint (CC): Productive cough and chest tightness for over 10 days.\n• History of Present Illness (HPI): Subacute onset of productive cough producing whitish sputum, associated with constant chest tightness and mild nasal congestion. Symptoms are worse at night.\n• Associated Symptoms: Reports low-grade fever; denies shortness of breath at rest, hemoptysis, night sweats, or significant weight loss.",
+      "objective": "• Remote Vocal Consultation: Auscultation is not possible.\n• Vocal Cues & Speech Attributes: Occasional coughing audible during conversation. Respiration rate seems normal.\n• Recommended Vitals: Measure body temperature, respiratory rate, and oxygen saturation (SpO2) at rest.",
+      "assessment": "• Primary Suspected Diagnosis: Acute Bronchitis vs. Upper Respiratory Tract Infection (URTI).\n• Differential Diagnoses:\n  1. Atypical Pneumonia\n  2. Cough-Variant Asthma\n  3. Pulmonary Tuberculosis (given duration)\n• Clinical Rationale: Cough lasting more than 10 days with chest tightness requires evaluation to rule out lower respiratory involvement or subacute infections like TB.",
+      "plan": "1. Immediate Interventions: Stream inhalation twice daily. Remain hydrated with warm fluids.\n2. Recommended Diagnostics: If cough exceeds 14 days, obtain a sputum smear for Acid-Fast Bacilli (AFB) and a chest X-ray.\n3. Symptomatic Treatment: Oral expectorant syrup (e.g. Guaifenesin) and Paracetamol 500mg PO if fever rises. Avoid cold drinks.\n4. Red Flag Warnings: Visit a physician immediately if breathing difficulty develops, sputum becomes bloody, or high-grade fever persists."
     },
     "triage": {
       "condition": "Acute Bronchitis / Respiratory Tract Infection",
