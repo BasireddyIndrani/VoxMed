@@ -7,7 +7,7 @@ import Reports from './pages/Reports';
 import Analytics from './pages/Analytics';
 import DoctorDashboard from './pages/DoctorDashboard';
 
-const API_URL = 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'https://voxmed-u242.onrender.com';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('landing');

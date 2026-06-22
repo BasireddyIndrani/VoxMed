@@ -5,10 +5,9 @@ import path from 'path';
 global.useLocalFallback = false;
 
 export const connectDB = async () => {
-  const uri = process.env.MONGODB_URI;
-  console.log("MONGODB_URI =", process.env.MONGODB_URI);
+  const uri = process.env.MONGO_URI || process.env.MONGODB_URI;
   if (!uri) {
-    console.warn('⚠️ MONGODB_URI is not set in environment variables.');
+    console.warn('⚠️ Neither MONGO_URI nor MONGODB_URI is set in environment variables.');
     console.warn('📁 VoxMed will run using local JSON database fallback.');
     global.useLocalFallback = true;
     return;

@@ -17,7 +17,26 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Enable CORS and parsing middleware
-app.use(cors());
+const allowedOrigins = [
+  'https://vox-16uvhgdpy-indhubreddy-4063s-projects.vercel.app'
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (
+      allowedOrigins.includes(origin) || 
+      /^http:\/\/localhost:\d+$/.test(origin) || 
+      /^http:\/\/127\.0\.0\.1:\d+$/.test(origin)
+    ) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // API Routes
