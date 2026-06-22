@@ -52,120 +52,7 @@ const loadUnicodeFont = async (doc, langName) => {
   }
 };
 
-// Dynamically inject Google Fonts stylesheet for browser canvas rendering
-const loadFontForCanvas = (langKey) => {
-  return new Promise((resolve) => {
-    const fontsMap = {
-      'telugu': { family: 'Noto Sans Telugu', url: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;700&display=swap' },
-      'hindi': { family: 'Noto Sans Devanagari', url: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap' },
-      'tamil': { family: 'Noto Sans Tamil', url: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700&display=swap' },
-      'kannada': { family: 'Noto Sans Kannada', url: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;700&display=swap' },
-      'malayalam': { family: 'Noto Sans Malayalam', url: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;700&display=swap' }
-    };
-    
-    const fontInfo = fontsMap[langKey];
-    if (!fontInfo) {
-      resolve('sans-serif');
-      return;
-    }
-    
-    // Safety timeout in case fonts don't load (default to system fallback font)
-    const timeout = setTimeout(() => {
-      resolve(`"${fontInfo.family}", sans-serif`);
-    }, 2000);
-    
-    const linkId = `font-${langKey}`;
-    if (document.getElementById(linkId)) {
-      if (document.fonts) {
-        document.fonts.ready.then(() => {
-          clearTimeout(timeout);
-          resolve(`"${fontInfo.family}", sans-serif`);
-        });
-      } else {
-        clearTimeout(timeout);
-        resolve(`"${fontInfo.family}", sans-serif`);
-      }
-      return;
-    }
-    
-    const link = document.createElement('link');
-    link.id = linkId;
-    link.rel = 'stylesheet';
-    link.href = fontInfo.url;
-    link.onload = () => {
-      if (document.fonts) {
-        document.fonts.ready.then(() => {
-          clearTimeout(timeout);
-          resolve(`"${fontInfo.family}", sans-serif`);
-        });
-      } else {
-        clearTimeout(timeout);
-        resolve(`"${fontInfo.family}", sans-serif`);
-      }
-    };
-    link.onerror = () => {
-      clearTimeout(timeout);
-      resolve('sans-serif');
-    };
-    document.head.appendChild(link);
-  });
-};
 
-// Render wrapped text onto an offscreen canvas to leverage browser text shaping for Indic scripts
-const drawTextOnCanvas = (text, font, widthPx, fontSize = 40, lineSpace = 1.5, textColor = '#1E293B') => {
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  
-  canvas.width = widthPx;
-  canvas.height = 2000; // temporary height
-  
-  ctx.font = `${fontSize}px ${font}`;
-  ctx.textBaseline = 'top';
-  
-  const words = text.split(' ');
-  const lines = [];
-  let currentLine = '';
-  
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i];
-    const testLine = currentLine ? currentLine + ' ' + word : word;
-    const metrics = ctx.measureText(testLine);
-    if (metrics.width > widthPx) {
-      if (currentLine) {
-        lines.push(currentLine);
-      }
-      currentLine = word;
-    } else {
-      currentLine = testLine;
-    }
-  }
-  if (currentLine) {
-    lines.push(currentLine);
-  }
-  
-  const lineHeight = fontSize * lineSpace;
-  const padding = 15;
-  const totalHeight = Math.max(lineHeight, lines.length * lineHeight + padding);
-  
-  canvas.height = totalHeight;
-  
-  // Clear/Transparent Background
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-  // Redraw text on scaled canvas size
-  ctx.font = `${fontSize}px ${font}`;
-  ctx.fillStyle = textColor;
-  ctx.textBaseline = 'top';
-  
-  lines.forEach((line, index) => {
-    ctx.fillText(line, 0, index * lineHeight);
-  });
-  
-  return {
-    dataUrl: canvas.toDataURL('image/png'),
-    heightPx: totalHeight
-  };
-};
 
 export const downloadConsultationPDF = async (data) => {
   if (!data) return;
@@ -176,7 +63,7 @@ export const downloadConsultationPDF = async (data) => {
     format: 'a4'
   });
 
-  const fontName = await loadUnicodeFont(doc, data.language);
+  await loadUnicodeFont(doc, data.language);
 
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
@@ -276,68 +163,9 @@ export const downloadConsultationPDF = async (data) => {
   doc.setFont('Helvetica', 'bold');
   doc.setFontSize(11);
   doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.text('AUDIO TRANSCRIPT & TRANSLATION', margin, currentY);
+  doc.text('AUDIO TRANSLATION', margin, currentY);
 
   currentY += 6;
-  doc.setFont('Helvetica', 'bold');
-  doc.setFontSize(9);
-  doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
-  doc.text(`Original Transcript (${data.language}):`, margin, currentY);
-  
-  currentY += 5;
-  
-  const isVernacular = ['telugu', 'hindi', 'tamil', 'kannada', 'malayalam'].includes((data.language || '').toLowerCase());
-  
-  if (isVernacular) {
-    const fontStyleName = await loadFontForCanvas((data.language || '').toLowerCase());
-    const scale = 4; // High DPI scale factor
-    const canvasResult = drawTextOnCanvas(
-      data.transcript || 'No transcript available',
-      fontStyleName,
-      contentWidth * scale,
-      10 * scale, // 10pt font equivalent
-      1.5,
-      '#1E293B'
-    );
-    
-    const imgWidth = contentWidth;
-    const imgHeight = canvasResult.heightPx / scale;
-    
-    // Check page overflow
-    if (currentY + imgHeight > pageHeight - 35) {
-      doc.addPage();
-      currentY = 25;
-      
-      // Page header on new page
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
-      doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
-      doc.line(margin, 17, pageWidth - margin, 17);
-    }
-    
-    doc.addImage(canvasResult.dataUrl, 'PNG', margin, currentY, imgWidth, imgHeight);
-    currentY += imgHeight + 5;
-  } else {
-    doc.setFont('Helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
-    const splitTranscript = doc.splitTextToSize(data.transcript || 'No transcript available', contentWidth);
-    
-    if (currentY + (splitTranscript.length * 5) > pageHeight - 35) {
-      doc.addPage();
-      currentY = 25;
-      
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
-      doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
-      doc.line(margin, 17, pageWidth - margin, 17);
-    }
-    
-    doc.text(splitTranscript, margin, currentY);
-    currentY += (splitTranscript.length * 5) + 5;
-  }
 
   // English Translation Label
   doc.setFont('Helvetica', 'bold');
