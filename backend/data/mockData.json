@@ -1,0 +1,82 @@
+[
+  {
+    "keywords": ["chest", "pain", "నొప్పి", "ఛాతి", "छाती", "दर्द"],
+    "language": "Telugu",
+    "transcript": "నాకు రెండు రోజులుగా ఛాతిలో నొప్పి ఉంది. శ్వాస తీసుకోవడం కష్టం.",
+    "translation": "I have had pain in my chest for two days. It is difficult to breathe.",
+    "soap_note": {
+      "subjective": "Patient reports experiencing dull, pressure-like chest pain for the past two days. Mentions that the pain is constant and worsens upon deep inspiration. Associated with shortness of breath (dyspnea). Denies radiating pain to the left arm or jaw, nausea, or sweating.",
+      "objective": "Patient appears in mild distress. Respiratory rate is slightly elevated at 22/min. No physical examination findings are available since this is a remote vocal consult. Suggest immediate vital check.",
+      "assessment": "Angina pectoris vs. acute coronary syndrome vs. pulmonary embolism vs. pleuritic chest pain. Given the presence of chest pain combined with dyspnea, cardiac or pulmonary emergencies must be ruled out.",
+      "plan": "1. Refer immediately to the nearest secondary/tertiary hospital or emergency department.\n2. Advise resting in a semi-upright position.\n3. Recommend administration of Aspirin 325mg PO if cardiac etiology suspected and no contraindications.\n4. Avoid any physical exertion."
+    },
+    "triage": {
+      "condition": "Acute Chest Pain / Possible Coronary Syndrome",
+      "urgency": "High"
+    }
+  },
+  {
+    "keywords": ["fever", "feverish", "జ్వరం", "పడిశం", "बुखार", "ताप"],
+    "language": "Hindi",
+    "transcript": "मुझे तीन दिनों से बहुत तेज बुखार है और बदन में दर्द है।",
+    "translation": "I have had a very high fever for three days and body ache.",
+    "soap_note": {
+      "subjective": "Patient is a female/male complaining of high-grade fever for three days, accompanied by generalized body aches (myalgia), moderate headache, and mild fatigue. Reports no cough, sore throat, or urinary burning.",
+      "objective": "Patient is alert but fatigued. Oral temperature reported at 102°F. Hydration status appears adequate.",
+      "assessment": "Acute febrile illness. Potential viral fever, dengue, malaria, or enteric fever depending on regional prevalence.",
+      "plan": "1. Administer Paracetamol 650mg PO every 6 hours as needed for fever and pain.\n2. Encourage abundant oral hydration (ORSL, coconut water, or clean water).\n3. Keep a temperature log every 4 hours.\n4. If fever persists beyond 5 days or if red flag symptoms (severe vomiting, bleeding, rash, confusion) develop, refer to primary health center (PHC)."
+    },
+    "triage": {
+      "condition": "Acute Febrile Illness / Possible Viral Syndrome",
+      "urgency": "Moderate"
+    }
+  },
+  {
+    "keywords": ["stomach", "abdominal", "కడుపు", "నొప్పి", "पेट", "दर्द"],
+    "language": "Telugu",
+    "transcript": "కడుపులో మంటగా ఉంది మరియు వాంతులు అవుతున్నాయి.",
+    "translation": "There is a burning sensation in the stomach and vomiting is occurring.",
+    "soap_note": {
+      "subjective": "Patient reports severe burning sensation in the epigastric region (upper abdomen) for the past 24 hours, accompanied by three episodes of non-bilious vomiting. Reports worsening after eating spicy food. Denies fever, diarrhea, or blood in vomitus.",
+      "objective": "Patient appears uncomfortable. Hydration status is fair with mild dry mouth.",
+      "assessment": "Acute gastritis vs. gastroesophageal reflux disease (GERD) vs. early gastroenteritis.",
+      "plan": "1. Advise small, frequent sips of ORS or water. Avoid solid foods for 4-6 hours.\n2. Suggest Proton Pump Inhibitor (e.g., Pantoprazole 40mg PO once daily before food) and Antacid gel if symptoms persist.\n3. Avoid spicy, oily, or acidic foods.\n4. Seek immediate evaluation if abdominal pain worsens, is localized to the right lower quadrant, or if unable to keep fluids down."
+    },
+    "triage": {
+      "condition": "Acute Gastritis / GERD with Emesis",
+      "urgency": "Moderate"
+    }
+  },
+  {
+    "keywords": ["joint", "knee", "కీళ్ల", "నొప్పులు", "నొప్పి", "जोड़", "घुटने"],
+    "language": "Tamil",
+    "transcript": "எனக்கு இரண்டு முழங்கால்களிலும் கடுமையான வலி உள்ளது, நடக்க முடியவில்லை.",
+    "translation": "I have severe pain in both of my knees and I am unable to walk.",
+    "soap_note": {
+      "subjective": "Patient is an elderly individual reporting bilateral knee joint pain for several months, which has severely worsened over the past week. Pain is exacerbated by walking and weight-bearing, making ambulation difficult. Notes morning stiffness lasting about 15 minutes.",
+      "objective": "Patient reports swelling in both knees. Joint range of motion is restricted due to pain. No warmth or erythema reported.",
+      "assessment": "Bilateral knee osteoarthritis flare-up vs. inflammatory arthritis.",
+      "plan": "1. Suggest paracetamol 500mg PO for pain management as needed. Avoid high-dose NSAIDs if renal or GI risk factors exist.\n2. Recommend local warm/cold compresses.\n3. Rest the joints during acute flare; avoid deep squatting or cross-legged sitting.\n4. Recommend evaluation at a community health center for physical exam and X-ray."
+    },
+    "triage": {
+      "condition": "Bilateral Knee Osteoarthritis / Joint Flare-Up",
+      "urgency": "Low"
+    }
+  },
+  {
+    "keywords": ["cough", "cold", "దగ్గు", "జలుబు", "खांसी", "जुकाम"],
+    "language": "Hindi",
+    "transcript": "मुझे बहुत दिनों से खांसी है और सीने में जकड़न महसूस हो रही है।",
+    "translation": "I have had a cough for many days and feel tightness in my chest.",
+    "soap_note": {
+      "subjective": "Patient complains of productive cough for over 10 days associated with chest tightness, nasal congestion, and low-grade fever. Denies shortness of breath at rest, hemoptysis, or night sweats.",
+      "objective": "Patient is coughing during conversation. Respiration rate is 18/min. Hydration is adequate.",
+      "assessment": "Acute bronchitis vs. respiratory tract infection vs. early pneumonia.",
+      "plan": "1. Hydration with warm water and steam inhalation twice daily.\n2. Cough suppressants or expectorants PO.\n3. Monitor temperature. If fever rises above 101°F or breathing difficulty develops, consult a doctor immediately.\n4. If cough persists beyond 2 weeks, recommend sputum test for Tuberculosis at the nearest PHC."
+    },
+    "triage": {
+      "condition": "Acute Bronchitis / Respiratory Tract Infection",
+      "urgency": "Moderate"
+    }
+  }
+]

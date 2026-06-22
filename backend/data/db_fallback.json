@@ -1,0 +1,38 @@
+[
+  {
+    "patient_id": "VM-6381",
+    "language": "Telugu",
+    "transcript": "నాకు చెస్ట్ పెయిన్ గా ఉంది",
+    "translation": "I have chest pain.",
+    "soap_note": {
+      "subjective": "Patient reports experiencing chest pain. This is a remote vocal consultation.",
+      "objective": "No objective findings available during this remote vocal consultation. Patient's voice tone cannot be assessed from text input alone. No reported vital signs.",
+      "assessment": "Chest pain is a symptom with a broad differential diagnosis. Possible conditions include, but are not limited to, cardiac etiologies (e.g., angina, myocardial infarction), pulmonary causes (e.g., pleurisy, pulmonary embolism), gastrointestinal issues (e.g., GERD, esophageal spasm), musculoskeletal pain (e.g., costochondritis), or anxiety.",
+      "plan": "Urgent medical evaluation is recommended to determine the etiology of the chest pain. Patient should seek immediate medical attention at an emergency department or contact emergency services (e.g., 911) for further assessment, including vital signs, ECG, and relevant laboratory tests. Patient should be advised not to delay care."
+    },
+    "triage": {
+      "condition": "Chest Pain (undetermined etiology)",
+      "urgency": "High"
+    },
+    "_id": "local_1782138413867",
+    "created_at": "2026-06-22T14:26:53.867Z"
+  },
+  {
+    "patient_id": "VM-2688",
+    "language": "Telugu",
+    "transcript": "నాకు చెస్ట్ పెయిన్ గా ఉంది",
+    "translation": "I have chest pain.",
+    "soap_note": {
+      "subjective": "Patient reports experiencing chest pain. No further details regarding onset, character, duration, radiation, aggravating/alleviating factors, or associated symptoms provided at this time.",
+      "objective": "Remote vocal consultation. No direct objective findings, vital signs, or physical examination available. Patient's voice does not immediately suggest acute distress, but assessment is limited.",
+      "assessment": "Differential diagnoses for chest pain are broad and include, but are not limited to, acute coronary syndrome (ACS), gastroesophageal reflux disease (GERD), musculoskeletal pain (e.g., costochondritis), anxiety, pleurisy, pulmonary embolism, or aortic dissection. Given the isolated complaint without further details, potentially life-threatening cardiac or pulmonary etiologies must be considered and ruled out first.",
+      "plan": "Due to the potentially serious and life-threatening nature of chest pain, urgent medical evaluation is strongly recommended. The patient should seek immediate medical attention (e.g., emergency department or urgent care facility) for comprehensive assessment, including a detailed history, physical examination, electrocardiogram (ECG), cardiac biomarkers, and imaging studies as indicated, to rule out acute cardiac or pulmonary pathology. Advise patient not to delay seeking care."
+    },
+    "triage": {
+      "condition": "Chest Pain (undifferentiated)",
+      "urgency": "High"
+    },
+    "_id": "local_1782138415766",
+    "created_at": "2026-06-22T14:26:55.766Z"
+  }
+]
