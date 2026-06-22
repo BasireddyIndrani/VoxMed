@@ -158,77 +158,7 @@ export const downloadConsultationPDF = async (data) => {
   doc.setDrawColor(241, 245, 249); // slate-100
   doc.line(margin, currentY, pageWidth - margin, currentY);
 
-  // Transcripts section
-  currentY += 8;
-  doc.setFont('Helvetica', 'bold');
-  doc.setFontSize(11);
-  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.text('AUDIO TRANSLATION', margin, currentY);
 
-  currentY += 6;
-
-  // English Translation Label
-  doc.setFont('Helvetica', 'bold');
-  doc.setFontSize(9);
-  doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
-  
-  if (currentY > pageHeight - 25) {
-    doc.addPage();
-    currentY = 25;
-    
-    doc.setFont('Helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
-    doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
-    doc.line(margin, 17, pageWidth - margin, 17);
-    
-    doc.setFont('Helvetica', 'bold');
-    doc.setFontSize(9);
-    doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
-  }
-  
-  doc.text('English Translation:', margin, currentY);
-  currentY += 5;
-  
-  // English Translation Content
-  doc.setFont('Helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
-  const splitTranslation = doc.splitTextToSize(data.translation || 'No translation available', contentWidth);
-  
-  for (let i = 0; i < splitTranslation.length; i++) {
-    if (currentY > pageHeight - 25) {
-      doc.addPage();
-      currentY = 25;
-      
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
-      doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
-      doc.line(margin, 17, pageWidth - margin, 17);
-      
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
-    }
-    doc.text(splitTranslation[i], margin, currentY);
-    currentY += 5;
-  }
-
-  // Divider
-  currentY += 5;
-  if (currentY > pageHeight - 25) {
-    doc.addPage();
-    currentY = 25;
-    
-    doc.setFont('Helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
-    doc.text(`Patient Record Summary - ID: ${data.patient_id}`, margin, 15);
-    doc.line(margin, 17, pageWidth - margin, 17);
-  }
-  doc.setDrawColor(226, 232, 240);
-  doc.line(margin, currentY, pageWidth - margin, currentY);
 
   // SOAP Note Section Header
   currentY += 8;

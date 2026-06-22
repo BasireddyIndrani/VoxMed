@@ -201,18 +201,12 @@ const Reports = ({ reports, onDeleteReport }) => {
                 </p>
               </div>
 
-              {/* Translation records */}
+              {/* Clinical Summary records */}
               <div className="space-y-3">
-                <h4 className="font-bold text-slate-800 text-[11px] uppercase tracking-wider">Transcripts</h4>
-                <div className="space-y-3">
-                  <div className="p-3.5 bg-slate-50 border border-slate-100 rounded-xl">
-                    <span className="text-[8px] font-bold text-slate-400 block mb-1">Original ({selectedReport.language})</span>
-                    <p className="text-xs text-slate-700 leading-normal italic">"{selectedReport.transcript}"</p>
-                  </div>
-                  <div className="p-3.5 bg-medical-50/20 border border-medical-100/20 rounded-xl">
-                    <span className="text-[8px] font-bold text-medical-500 block mb-1">English Translation</span>
-                    <p className="text-xs text-slate-700 leading-normal font-medium">"{selectedReport.translation}"</p>
-                  </div>
+                <h4 className="font-bold text-slate-800 text-[11px] uppercase tracking-wider">Clinical Summary</h4>
+                <div className="p-3.5 bg-medical-50/20 border border-medical-100/20 rounded-xl">
+                  <span className="text-[8px] font-bold text-medical-500 block mb-1">Clinical Synthesis (English)</span>
+                  <p className="text-xs text-slate-700 leading-normal font-medium">"{selectedReport.translation}"</p>
                 </div>
               </div>
 

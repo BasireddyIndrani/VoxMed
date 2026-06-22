@@ -492,18 +492,12 @@ const Dashboard = ({ onAddReport, API_URL }) => {
                   </div>
                 </div>
 
-                {/* Transcripts Translation Cards */}
+                {/* Clinical Summary Cards */}
                 <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-premium space-y-4">
-                  <h4 className="font-display font-bold text-slate-800 text-xs">Translation Records</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 bg-slate-50 border border-slate-100 rounded-2xl">
-                      <span className="text-[9px] font-bold text-slate-400 block mb-1">Original ({processedResult.language})</span>
-                      <p className="text-xs text-slate-700 leading-relaxed italic">"{processedResult.transcript}"</p>
-                    </div>
-                    <div className="p-4 bg-medical-50/20 border border-medical-100/30 rounded-2xl">
-                      <span className="text-[9px] font-bold text-medical-500 block mb-1">English Translation</span>
-                      <p className="text-xs text-slate-700 leading-relaxed font-medium">"{processedResult.translation}"</p>
-                    </div>
+                  <h4 className="font-display font-bold text-slate-800 text-xs">Clinical Summary of Symptoms</h4>
+                  <div className="p-4 bg-medical-50/20 border border-medical-100/30 rounded-2xl">
+                    <span className="text-[9px] font-bold text-medical-500 block mb-1">Clinical Synthesis (English)</span>
+                    <p className="text-xs text-slate-700 leading-relaxed font-medium">"{processedResult.translation}"</p>
                   </div>
                 </div>
 
